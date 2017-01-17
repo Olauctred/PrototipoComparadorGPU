@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8>
+	<meta name=description content="">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<title>Añadir GPU</title>
+	<link rel=stylesheet href="./style/style.css">
+	<script type="text/javascript">
+		/* La función obtiene los valores del formulario y 
+		   actualiza la lista del GPUs además de crear los nodos
+		   option necesarios en la página padre. */
+		function cerrar() {
+			var es_firefox = navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+			var es_iExplorer = navigator.userAgent.toLowerCase().indexOf('trident/7.0') > -1;
+			if(!es_firefox && !es_iExplorer){
+				alert("La comunicación entre ventanas no está permitida desde este navegador.");
+			}
+			else{
+				var dCodGpu = window.document.getElementById('dCodGpu').value + (window.opener.listaGpu.length + 1);
+				var dNombre = window.document.getElementById('dNombre').value.toUpperCase();
+				var dMemoria = window.document.getElementById('dMemoria').value;
+				var dVelNucleo = window.document.getElementById('dVelNucleo').value;
+				var dVelMemoria = window.document.getElementById('dVelMemoria').value;
+				var dConsumo = window.document.getElementById('dConsumo').value;
+				var dFoto = window.document.getElementById('dFoto').value;
+				if(dFoto == "")
+					dFoto = undefined;
+				
+				var newGPU = new window.opener.GPU(dCodGpu, dNombre, dMemoria, dVelNucleo, dVelMemoria, dConsumo, dFoto);
+				window.opener.listaGpu.push(newGPU);
+				window.opener.addNewOption();
+			}
+			this.window.close();
+		}
+	</script>
+</head>
+<body>
+	<video autoplay muted loop>
+		<source src="./media/video/loop1.mp4" type="video/mp4">
+	</video>
+	<main id="formulario">
+		<form action="" onsubmit="cerrar();">
+			<fieldset><legend>AÑADIR GPU</legend>
+				<h1>AÑADIR GPU_</h1>
+				<div id="formWrapper">
+					<div id="" class="OpenClose">┌</div>
+					<div id="" class="OpenClose">┐</div>
+					<p><label for="dCodGpu">CÓDIGO GPU</label><input id="dCodGpu" style="background:#666;" class="even" type="text" value="GPU" disabled></p>
+					<p><label for="dNombre">NOMBRE / MODELO</label><input id="dNombre" class="" type="text" value="" required></p>
+					<p><label for="dMemoria">MEMORIA</label><input id="dMemoria" type="number" value="" placeholder="GB" class="even" required></p>
+					<p><label for="dVelNucleo">VELOCIDAD NÚCLEO</label><input id="dVelNucleo"  type="number" value="" placeholder="MHz" required></p>
+					<p><label for="dVelMemoria">VELOCIDAD MEMORIA</label><input id="dVelMemoria" type="number" value="" placeholder="MHz" class="even" required></p>
+					<p><label for="dConsumo">CONSUMO W</label><input id="dConsumo" type="number" value="" placeholder="W" required></p>
+					<p><label for="dFoto">FOTO</label><input id="dFoto" class="even" type="url" value="" placeholder="URL"></p>
+					<div id="" class="OpenClose">└</div>
+					<div id="" class="OpenClose">┘</div>
+				</div>
+				<div id="buttonsWrapper">
+					<input type="button" value="CANCELAR" onclick="window.close();">
+					<input class="even" type="submit" value="AGREGAR">
+				</div>			
+			</fieldset>
+		</form>
+	</main>
+</body>
+</html>

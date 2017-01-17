@@ -1,0 +1,751 @@
+@import url("reset.css");
+
+*, *::before, *::after {
+	box-sizing: content-box; 
+	font-family: sans-serif;
+	color:#fff;
+	text-shadow: -1px -1px 1px black;
+}
+
+/* Evitar que se pueda seleccionar */
+span{
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select:none;
+}
+
+.noScrollbar {
+	overflow: hidden;
+}
+
+a {
+	text-decoration: none;
+}
+
+/*=================*/
+/* MENU */
+/*=================*/
+
+#menuWrapper {
+	position:fixed;
+	height: 100vh;
+	width: 400px;
+	background: rgb(255, 0, 0);
+	
+	box-shadow: 1px 0px 5px black;
+
+	transition: all .6s ease;
+	margin-left:-400px;
+
+	z-index: 100;
+}
+.mix{
+	mix-blend-mode: overlay;
+}
+
+#menuWrapper.open {
+	margin-left: 0;
+}
+
+#menuWrapper > * {
+	width:300px;
+	margin-left: calc(50% - 150px);
+	position: absolute;
+}
+#menuWrapper > #tituloDiv {
+	position:fixed;
+	left:0;
+	margin-left: calc(400px - 150px + 15px);
+	/*width:300px;*/
+	margin-top: 25px;
+	border-bottom: 1px solid white;
+
+	margin-top: 25px;
+	margin-left: 15px;
+	left: 50px;
+}
+#menuWrapper > #tituloDiv.tituloDivClose {
+	width: 0;
+	transition: width .6s ease;
+}
+#menuWrapper > #tituloDiv.tituloDivOpen {
+	width: 300px;
+	transition: width 1.6s ease;
+}
+#menuWrapper > #tituloDiv::before {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border:21px solid white;
+	border-right: none;
+	border-left: 42px solid white;
+	border-radius: 0 5px 0 5px;
+	left:-15px;
+	top:-1px;
+	box-shadow: -1px -1px 1px black;
+}
+#menuWrapper > #tituloDiv h1 {
+	display: block;
+	font-size: xx-large;
+	height: 40px;
+	line-height: 40px;
+	/*padding-left: 50px;*/
+}
+#escribirDiv {
+	position: relative;
+	margin-left: 50px;
+}
+#menuWrapper > #tituloDiv h1 > span {
+	display: inline;
+}
+
+#menuWrapper > ul {
+	margin-top: 150px;
+}
+#menuWrapper > ul > li {
+	border:1px solid #FFF;
+	margin-top:10px;
+	margin-bottom: 10px;
+	line-height: 30px;
+	border-radius: 5px 0 5px 0 ;
+	box-shadow: -1px -1px 5px black;
+	transition: all 0.2s ease;
+}
+#menuWrapper > ul > li:nth-child(even) {
+	border-radius: 0 5px 0 5px ;
+}
+#menuWrapper > ul > li:hover {
+	font-weight: bold;
+	transform: translateX(15px);
+	background: #FFF;
+}
+#menuWrapper > ul > li > a {
+	display: block;
+	font-size: medium;
+	padding-left: 10px;
+	height: 100%;
+
+	text-shadow: none;
+}
+#menuWrapper > ul > li:hover > a{
+	color:rgb(255, 36, 33);
+}
+
+/*=================*/
+/* BOTÓN MENU */
+/*=================*/
+
+#menuTrigger {
+	position: fixed;
+	cursor: pointer;
+	width: 42px;
+	margin-top: 25px;
+	margin-left: 0;
+	left: 50px;
+}
+.bar1, .bar2, .bar3 {
+    width: 30px;
+    height: 5px;
+    background-color: rgb(255, 36, 33);
+    box-shadow: 1px 1px 1px black;
+    margin: 6px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: 0.6s;
+}
+.change .bar1 {
+    -webkit-transform: rotate(-45deg) translate(-9px, 6px) ;
+    transform: rotate(-45deg) translate(-9px, 6px) ;
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+    -webkit-transform: rotate(45deg) translate(-8px, -8px) ;
+    transform: rotate(45deg) translate(-8px, -8px) ;
+}
+
+/* Video */
+video { 
+	filter: opacity(.3);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100vw;
+    min-height: 100vh;
+    width: auto;
+    height: auto;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+/*=================*/
+/* MAIN */
+/*=================*/
+main {
+	box-sizing: border-box;
+	position: absolute;
+	display: flex;
+	flex-flow: row wrap;
+	width: 100vw;
+	height: 100%;
+	left:0;
+	top:0;
+	padding: 50px;
+	padding-top: 85px;
+	/*background: rgba(255, 255, 0, .5);*/
+	transition: left .6s ease;
+}
+main.menuOpened {
+	left: 400px;
+}
+
+/* GRÁFICAS*/
+#itemsToCompare {
+	height: 50px;
+	line-height: 50px;
+}
+
+#graficaWrapper section {
+	padding-left: 15px;
+	text-align: center;
+}
+#graficaWrapper section > * {
+	display: inline-block;
+}
+#graficaWrapper section > h1 {
+	display: block;
+	text-shadow: -2px -2px 1px black;
+	font-size: 25px;
+	line-height: 25px;
+	height: 25px;
+	padding: 0;
+	margin:0;
+}
+#graficaWrapper section > span {
+	height: 2px;
+	line-height: 2px;
+	display: block;
+	font-weight: bold;
+	font-size: 80px;
+	width: 50%;
+	margin: 0 auto;
+	background-color: rgb(255, 0, 0);
+	margin-bottom: 5px;
+}
+
+#graficaWrapper {
+	order:1;
+	width:calc(100% - 400px);
+	box-sizing: content-box;
+}
+
+#graficaWrapper > .axis-y {
+	padding-left: 15px;
+	height: calc((30px + 50px + 15px)*5);
+	/*border-left: 5px solid white;*/
+}
+#graficaWrapper > .axis-y > .axis-x {
+	margin-left: 0;
+	margin-right: 0;
+
+	border-bottom: 2px solid white;
+}
+#graficaWrapper > .axis-y > .axis-x > div {
+	position: relative;
+	background: red;
+	height: 10px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	box-shadow: -1px -1px 1px black;
+
+	width: 0%;
+
+	transition: width 1.5s ease;
+}
+#graficaWrapper > .axis-y > .dataItem > h2 {
+	font-size: large;
+	padding-top: 10px;
+	font-weight: normal;
+	color:#666666;
+	text-shadow: none;
+}
+
+/*=================*/
+/* MENU DE SELECCION */
+/*=================*/
+#selectMenuWrapper {
+	order:1;
+
+	display: flex;
+	flex-flow: row wrap;
+
+	height: 100%;
+	width: 400px;
+}
+
+#selectMenuWrapper #selectTop {
+	height: 50px;
+	width: 100%;
+}
+
+#selectMenuWrapper > .selection {
+	width: 100%;
+	height: calc(50% - 25px);
+	max-height: 400px;
+	/*padding-right: 15px;*/
+
+	padding-top: 10px;
+}
+
+.selection > figure {
+	height: 100%;
+	width: 100%;
+}
+
+.selection > figure > .imgWrapper {
+	display: flex;
+	align-items: center;
+	position: relative;
+	height: 70%;
+	width: 80%;
+	overflow: hidden;
+	background-color: white;
+
+	margin-left: 10%;
+	margin-right: 10%;
+	
+	border:1px solid #FF0000;
+
+	border-radius: 0 25px 0 25px ;
+
+	z-index: 100;
+}
+
+.selection > figure > .imgWrapper > img {
+	position: relative;
+	width: 100%;
+	height: auto;
+}
+
+.selection > figure > figcaption {
+	text-align: center;
+	height: 35%;
+}
+
+.selection > figure > figcaption h1 {
+	font-size: 18px;
+	line-height:18px;
+
+	font-weight: normal;
+
+	padding-top: 5px;
+
+	text-shadow: none;
+
+	color: #FF0000;
+}
+
+.selection > figure > figcaption > .paginationWrapper{
+	width: 100%;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.selection > figure > figcaption > .paginationWrapper:hover{
+
+}
+
+.selection > figure > figcaption > .paginationWrapper > h1{
+	padding-top: 10px;
+	width: 70%;
+
+	font-weight: normal;
+}
+
+.selection > figure > figcaption > .paginationWrapper > span[class*="pagination-"]{
+	display: block;
+	color:#f00;
+	text-shadow: none;
+	width: 5%;
+	margin-top: 10px;
+
+	cursor: pointer;
+
+	font-size: 22px;
+	line-height:18px;
+
+}
+
+.selection > figure > figcaption > .paginationWrapper > span[class="pagination-left"]{
+	margin-left: 10%;
+}
+.selection > figure > figcaption > .paginationWrapper > span[class*="pagination-right"]{
+	margin-right: 10%;
+}
+
+.selection > figure > figcaption > h1{
+	font-size: 24px;
+}
+
+.selection > figure > figcaption > select {
+	display: none;
+}
+
+.selection > figure > figcaption > select,
+.selection > figure > figcaption > select > * {
+	color: black;
+	text-shadow: none;
+}
+
+/*=================*/
+/* FORMULARIO AÑADIR */
+/*=================*/
+#formulario {
+	padding: 25px;
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+#formulario > form {
+	width: 100%;
+	min-width: 600px;
+	height: auto;
+}
+
+#formulario > form > fieldset {
+	width: 100%;
+	height: auto;
+	background: rgb(255, 0, 0);
+	mix-blend-mode: overlay;
+	
+	box-shadow: 0px 0px 20px black;
+	border-radius: 3px;
+}
+
+#formulario > form > fieldset > legend {
+	display: none;
+}
+
+#formulario > form > fieldset > h1 {
+	display: block;
+	font-size: xx-large;
+	margin-left: 60px;
+	margin-top: 60px;
+}
+
+#formWrapper {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 25px;
+	width: calc(100% - 50px);
+}
+
+#formWrapper > p{
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+	padding:10px;
+}
+
+#formWrapper > .OpenClose {
+	font-size: 20px;
+	width: 50%;
+}
+
+#formWrapper > .OpenClose:nth-child(1){
+	text-align: left;
+}
+#formWrapper > .OpenClose:nth-child(2){
+	text-align: right;
+}
+#formWrapper > .OpenClose:nth-child(10){
+	text-align: left;
+}
+#formWrapper > .OpenClose:nth-child(11){
+	text-align: right;
+}
+#formWrapper label {
+	align-self: center;
+	margin-left: 25px;
+	width: 100%;
+}
+
+#formWrapper input {
+	width: 100%;
+	background: red;
+	border:1px solid #FFF;
+	line-height: 30px;
+	border-radius: 5px 0 5px 0 ;
+	box-shadow: -1px -1px 5px black;
+	
+	font-size: medium;
+	padding-left: 5px;
+	margin-top: 5px;
+	margin-left: 25px;
+	margin-right: 25px;
+	text-shadow: none;
+
+	transition: all 0.2s ease;
+}
+#formWrapper input.even{
+	border-radius: 0 5px 0 5px ;
+}
+
+#formWrapper input:focus{
+	outline: none;
+	transform: translateX(15px);
+	background: #FFF;
+	color: red;
+	font-weight: bold;
+}
+
+#buttonsWrapper {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 25px;
+	width: calc(100% - 50px);
+
+	margin-left: 60px;
+	margin-bottom: 60px;
+}
+
+#buttonsWrapper input{
+	cursor: pointer;
+	width: 120px;
+	background: red;
+	border:1px solid #FFF;
+	line-height: 30px;
+	border-radius: 5px 0 5px 0 ;
+	box-shadow: -1px -1px 5px black;
+	
+	font-size: medium;
+	padding-left: 5px;
+	margin-top: 5px;
+	margin-right: 25px;
+	text-shadow: none;
+
+	transition: all 0.2s ease;
+}
+
+#buttonsWrapper input:hover {
+	transform: translateX(15px);
+	background: #FFF;
+	color: red;
+	font-weight: bold;
+}
+
+#buttonsWrapper input:focus {
+	outline: none;
+}
+
+#buttonsWrapper input.even {
+	border-radius: 0 5px 0 5px ;
+}
+
+input::-webkit-input-placeholder {
+    color: white;
+}
+input:-moz-placeholder {
+    color: white;
+}
+input::-moz-placeholder {
+    color: white;
+}
+input:-ms-input-placeholder {
+    color: white;
+}
+
+
+#formWrapper {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 25px;
+	width: calc(100% - 50px);
+}
+
+#formWrapper > p{
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+	padding:10px;
+}
+
+#formWrapper > .OpenClose {
+	font-size: 20px;
+	width: 50%;
+}
+
+#formWrapper > .OpenClose:nth-child(1){
+	text-align: left;
+}
+#formWrapper > .OpenClose:nth-child(2){
+	text-align: right;
+}
+#formWrapper > .OpenClose:nth-child(10){
+	text-align: left;
+}
+#formWrapper > .OpenClose:nth-child(11){
+	text-align: right;
+}
+#formWrapper label {
+	align-self: center;
+	margin-left: 25px;
+	width: 100%;
+}
+
+
+/*=================*/
+/* FORMULARIO CAMBIO COLOR */
+/*=================*/
+
+#formWrapperGraf {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 25px;
+	width: calc(100% - 50px);
+}
+
+#formWrapperGraf > p{
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+	padding:10px;
+}
+
+#formWrapperGraf > .OpenClose {
+	font-size: 20px;
+	width: 50%;
+}
+
+#formWrapperGraf > .OpenClose:nth-child(1){
+	text-align: left;
+}
+#formWrapperGraf > .OpenClose:nth-child(2){
+	text-align: right;
+}
+#formWrapperGraf > .OpenClose:nth-child(4){
+	text-align: left;
+}
+#formWrapperGraf > .OpenClose:nth-child(5){
+	text-align: right;
+}
+#formWrapperGraf label {
+	align-self: center;
+	margin-left: 25px;
+	width: 100%;
+}
+
+#formWrapperGraf input {
+	width: 100%;
+	background: red;
+	border:1px solid #FFF;
+	line-height: 30px;
+	border-radius: 5px 0 5px 0 ;
+	box-shadow: -1px -1px 5px black;
+	
+	font-size: medium;
+	padding-left: 5px;
+	margin-top: 5px;
+	margin-left: 25px;
+	margin-right: 25px;
+	text-shadow: none;
+
+	transition: all 0.2s ease;
+}
+#formWrapperGraf input.even{
+	border-radius: 0 5px 0 5px ;
+}
+
+#formWrapperGraf input:hover{
+	cursor: pointer;
+	outline: none;
+	transform: translateX(15px);
+	background: #FFF;
+	color: red;
+	font-weight: bold;
+}
+#formWrapperGraf input:focus{
+	outline: none;
+}
+
+#buttonsWrapper {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 25px;
+	width: calc(100% - 50px);
+
+	margin-left: 60px;
+	margin-bottom: 60px;
+}
+
+#buttonsWrapper input{
+	cursor: pointer;
+	width: 120px;
+	background: red;
+	border:1px solid #FFF;
+	line-height: 30px;
+	border-radius: 5px 0 5px 0 ;
+	box-shadow: -1px -1px 5px black;
+	
+	font-size: medium;
+	padding-left: 5px;
+	margin-top: 5px;
+	margin-right: 25px;
+	text-shadow: none;
+
+	transition: all 0.2s ease;
+}
+
+#buttonsWrapper input:hover {
+	transform: translateX(15px);
+	background: #FFF;
+	color: red;
+	font-weight: bold;
+}
+
+#buttonsWrapper input:focus {
+	outline: none;
+}
+
+#buttonsWrapper input.even {
+	border-radius: 0 5px 0 5px ;
+}
+
+#formWrapperGraf {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 25px;
+	width: calc(100% - 50px);
+}
+
+#formWrapperGraf > p{
+	display: flex;
+	flex-flow: row wrap;
+	width: 100%;
+	padding:10px;
+}
+
+#formWrapperGraf > .OpenClose {
+	font-size: 20px;
+	width: 50%;
+}
+
+#formWrapperGraf > .OpenClose:nth-child(1){
+	text-align: left;
+}
+#formWrapperGraf > .OpenClose:nth-child(2){
+	text-align: right;
+}
+#formWrapperGraf > .OpenClose:nth-child(10){
+	text-align: left;
+}
+#formWrapperGraf > .OpenClose:nth-child(11){
+	text-align: right;
+}
+#formWrapperGraf label {
+	align-self: center;
+	margin-left: 25px;
+	width: 100%;
+}
